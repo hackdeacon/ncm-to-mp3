@@ -568,6 +568,10 @@ body {
    11. Responsive - Systematic Adaptation
    ======================================== */
 @media (max-width: 768px) {
+    .hero {
+        align-items: center;
+    }
+
     .file-list {
         max-height: 400px;
         margin: 0 calc(var(--space-5) * -1);
