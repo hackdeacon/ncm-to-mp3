@@ -1,49 +1,49 @@
-# NCM to MP3 Converter
+# NCM 转 MP3 工具
 
-A local-only NCM file decryption tool that runs entirely in the browser.
+一款纯浏览器端运行的本地 NCM 文件解密工具。
 
-## Features
+## 功能特性
 
-- **Local Processing**: All decryption happens in your browser - no files are uploaded to any server
-- **Batch Conversion**: Convert multiple NCM files at once
-- **Audio Preview**: Listen to converted files before downloading
-- **Metadata Preservation**: Album art and ID3 tags are retained
-- **Dark/Light Mode**: Automatically follows your system theme
+- **本地处理**：所有解密在浏览器中完成，无需上传文件到服务器
+- **批量转换**：支持同时转换多个 NCM 文件
+- **音频试听**：下载前可直接预览转换后的文件
+- **保留元信息**：保留专辑封面和 ID3 标签
+- **深色/浅色模式**：自动跟随系统主题
 
-## How It Works
+## 实现原理
 
-NCM files are encrypted FLAC/OGG files with a proprietary header. This tool:
+NCM 文件是经过加密的 FLAC/OGG 音频，附带专有文件头。本工具的工作流程：
 
-1. **Parses the NCM file structure** - Reads the proprietary `.ncm` file format to locate encrypted data blocks
-2. **Extracts the key** - Decrypts the AES key using the hardcoded public key from NCM's algorithm
-3. **Decrypts the audio data** - Uses AES-CTR mode to decrypt the audio payload
-4. **Handles metadata** - Parses and preserves ID3 tags and album artwork
-5. **Outputs standard audio** - Produces playable MP3/FLAC files
+1. **解析 NCM 文件结构**：读取专有的 `.ncm` 文件格式，定位加密数据块
+2. **提取密钥**：使用 NCM 算法中硬编码的公钥解密 AES 密钥
+3. **解密音频数据**：使用 AES-CTR 模式解密音频数据
+4. **处理元数据**：解析并保留 ID3 标签和专辑封面
+5. **输出标准音频**：生成可播放的 MP3/FLAC 文件
 
-The core decryption logic reverse-engineers NCM's encryption scheme:
-- The key is encrypted with a fixed RSA public key
-- The audio data uses AES-CTR encryption
-- The file format includes a metadata section with cover art and ID3 info
+核心解密逻辑逆向自 NCM 的加密方案：
+- 密钥使用固定 RSA 公钥加密
+- 音频数据采用 AES-CTR 加密
+- 文件包含带封面和 ID3 信息的元数据区
 
-## Disclaimer
+## 免责声明
 
-This project is for **educational purposes only**.
+本项目仅供**学习研究使用**。
 
-- This tool does not circumvent any effective access control measures under DMCA Section 1201
-- Users must legally own the original NCM files
-- The developer is not responsible for any misuse
-- Commercial use is not permitted
+- 本工具未规避 DMCA 第 1201 条下的任何有效访问控制措施
+- 用户必须合法拥有原始 NCM 文件
+- 开发者不对任何滥用行为负责
+- 禁止商业用途
 
-## Usage
+## 使用方法
 
-1. Open `index.html` in a modern browser
-2. Click the upload area or drag & drop `.ncm` files
-3. Preview or download converted files
+1. 在现代浏览器中打开 `index.html`
+2. 点击上传区域或拖拽 `.ncm` 文件
+3. 预览或下载转换后的文件
 
-## License
+## 许可证
 
 MIT License
 
-## Credits
+## 致谢
 
-Inspired by various NCM decryption projects in the community.
+灵感来自社区中各种 NCM 解密项目。
