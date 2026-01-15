@@ -255,13 +255,9 @@ body {
    7. File List - Structured Data Display
    ======================================== */
 .file-list-container {
-    display: none;
+    display: block;
     margin-bottom: var(--space-6);
     overflow-x: hidden;
-}
-
-.file-list-container {
-    display: block;
 }
 
 /* File List Items */

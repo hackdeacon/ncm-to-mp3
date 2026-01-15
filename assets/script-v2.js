@@ -42,20 +42,6 @@ function updateDownloadAllStatus() {
 	document.getElementById('download-all-btn-container').style.visibility = hasItem ? "visible" : "hidden";
 }
 
-function releaseMemory(element) {
-	const newElement = element.cloneNode(false); // false = 不克隆子节点
-	element.parentNode.replaceChild(newElement, element);
-
-	if (newElement.tagName === 'IMG' || newElement.tagName === 'VIDEO') {
-		newElement.src = '';
-	}
-
-	while (newElement.firstChild) {
-		releaseMemory(newElement.firstChild);
-		newElement.removeChild(newElement.firstChild);
-	}
-}
-
 function removeElementByID(id) {
 	const element = document.getElementById(id);
 	if (element && element.parentNode) {
@@ -199,18 +185,10 @@ function createListItem(res) {
 }
 
 function handleFileSelect(evt) {
-	const files = evt.target.files;
-	const fileNames = Array.from(files).map(f => f.name).join("|");
-
-	for (const file of files) {
-		const reader = new FileReader();
-		reader.onloadend = () => {
-			decrypt.Decrypt(file).then(createListItem);
-		};
-		reader.readAsArrayBuffer(file);
+	var files = evt.target.files;
+	for (var i = 0; i < files.length; i++) {
+		decrypt.Decrypt(files[i]).then(createListItem);
 	}
-
-	// $.ajax({ type: "GET", url: "/site/log", data: fileNames });
 }
 
 function showDownloaded() {
@@ -250,22 +228,14 @@ function downloadClicked() {
 }
 
 function overlayOff() {
-	document.getElementById("overlay").style.display = "none";
+	var overlay = document.getElementById("overlay");
+	if (overlay) {
+		overlay.style.display = "none";
+	}
 	setCookie("donated", "true", 30);
 	showed = true;
 	if (downloadTriggered) {
 		downloadTriggered = false;
 		showDownloaded();
 	}
-}
-
-function refreshMPAnnimation() {
-	const disabled = getCookie("disable_annimation_mp") === "true";
-	document.getElementById("toggle-mp-annimation-text").innerText = disabled ? "开启公众号加载动画" : "关闭公众号加载动画";
-}
-
-function toggleMPAnnimation() {
-	const disabled = getCookie("disable_annimation_mp") === "true";
-	setCookie("disable_annimation_mp", disabled ? "false" : "true", 10086);
-	refreshMPAnnimation();
 }

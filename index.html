@@ -11,14 +11,13 @@
     <link rel="stylesheet" href="index.css">
     <script>
         (function() {
-            var theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-            document.documentElement.setAttribute('data-theme', theme);
+            var darkQuery = window.matchMedia('(prefers-color-scheme: dark)');
+            var setTheme = function(isDark) {
+                document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+            };
+            setTheme(darkQuery.matches);
+            darkQuery.addEventListener('change', function(e) { setTheme(e.matches); });
         })();
-    </script>
-    <script>
-        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
-            document.documentElement.setAttribute('data-theme', e.matches ? 'dark' : 'light');
-        });
     </script>
 </head>
 
